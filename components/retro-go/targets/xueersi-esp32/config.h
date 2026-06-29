@@ -40,6 +40,7 @@
 }
 #define RG_GAMEPAD_VIRT_MAP {\
     {RG_KEY_MENU,   .src = RG_KEY_START | RG_KEY_SELECT},\
+    {RG_KEY_OPTION, .src = RG_KEY_DOWN | RG_KEY_START},\
 }
 
 // Sensors are present but unused by retro-go
