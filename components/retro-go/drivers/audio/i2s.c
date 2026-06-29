@@ -148,23 +148,14 @@ static bool driver_submit(const rg_audio_frame_t *frames, size_t count)
             left = 0;
             right = ((left + right) >> 1) + 0x8000; // the internal DAC expects unsigned data
         #elif RG_AUDIO_USE_INT_DAC == 3
-            // In two channel mode we use left and right as a differential mono output to increase resolution.
+            // True differential output: GPIO26 (DAC2, left) and GPIO25 (DAC1, right) are complementary.
+            // When GPIO26 goes up, GPIO25 goes down — doubling the effective signal swing.
             int sample = (left + right) >> 1;
-            if (sample > 0x7F00)
-            {
-                left = 0x8000 + (sample - 0x7F00);
-                right = -0x8000 + 0x7F00;
-            }
-            else if (sample < -0x7F00)
-            {
-                left = 0x8000 + (sample + 0x7F00);
-                right = -0x8000 + -0x7F00;
-            }
-            else
-            {
-                left = 0x8000;
-                right = -0x8000 + sample;
-            }
+            int dac_val = sample + 0x8000; // shift to unsigned, 0x8000 = 1.65V midpoint
+            if (dac_val > 0xFFFF) dac_val = 0xFFFF;
+            if (dac_val < 0)      dac_val = 0;
+            left = dac_val;                // GPIO26 = audio signal
+            right = 0xFFFF - dac_val;      // GPIO25 = inverted/complementary
         #endif
         }
 

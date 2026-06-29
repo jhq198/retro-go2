@@ -81,7 +81,7 @@ void rg_storage_init(void)
     };
 
     esp_err_t err = spi_bus_initialize(RG_STORAGE_SDSPI_HOST, &bus_cfg, SPI_DMA_CH_AUTO);
-    if (err != ESP_OK) // check but do not abort, let esp_vfs_fat_sdspi_mount decide
+    if (err != ESP_OK && err != ESP_ERR_INVALID_STATE) // Ignore if already initialized (shared with display)
         RG_LOGW("SPI bus init failed (0x%x)", err);
 
     sdmmc_host_t host_config = SDSPI_HOST_DEFAULT();
