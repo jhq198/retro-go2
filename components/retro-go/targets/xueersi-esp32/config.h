@@ -35,11 +35,11 @@
     {RG_KEY_RIGHT,  .num = GPIO_NUM_35, .pullup = 0, .level = 0},\
     {RG_KEY_A,      .num = GPIO_NUM_34, .pullup = 0, .level = 0},\
     {RG_KEY_B,      .num = GPIO_NUM_12, .pullup = 1, .level = 0},\
+    {RG_KEY_START,  .num = GPIO_NUM_0, .pullup = 1, .level = 0},\
+    {RG_KEY_SELECT, .num = GPIO_NUM_26, .pullup = 1, .level = 0},\
 }
 #define RG_GAMEPAD_VIRT_MAP {\
-    {RG_KEY_START,  .src = RG_KEY_UP | RG_KEY_DOWN},\
-    {RG_KEY_SELECT, .src = RG_KEY_LEFT | RG_KEY_RIGHT},\
-    {RG_KEY_MENU,   .src = RG_KEY_A | RG_KEY_B},\
+    {RG_KEY_MENU,   .src = RG_KEY_START | RG_KEY_SELECT},\
 }
 
 // Sensors are present but unused by retro-go
