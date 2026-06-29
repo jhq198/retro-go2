@@ -8,8 +8,8 @@
 #define RG_STORAGE_SDSPI_SPEED      SDMMC_FREQ_DEFAULT
 
 // Audio: Internal DAC on GPIO26 only
-#define RG_AUDIO_USE_BUZZER_PIN     0
-#define RG_AUDIO_USE_INT_DAC        1   // 0 = Disable, 1 = GPIO25, 2 = GPIO26, 3 = Both
+#define RG_AUDIO_USE_BUZZER_PIN     14
+#define RG_AUDIO_USE_INT_DAC        0   // 0 = Disable, 1 = GPIO25, 2 = GPIO26, 3 = Both
 #define RG_AUDIO_USE_EXT_DAC        0   // 0 = Disable, 1 = Enable
 
 // Video: ST7735 160x128 landscape, SPI2 @ 20MHz (safe speed for shared bus)
